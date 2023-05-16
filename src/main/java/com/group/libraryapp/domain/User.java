@@ -1,5 +1,7 @@
 package com.group.libraryapp.domain;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -11,6 +13,9 @@ public class User {
     private String name;
     @Column(nullable = false)
     private Integer age;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserLoanHistory> userLoanHistoryList = new ArrayList<>();
 
     public User(String name, Integer age) {
 
