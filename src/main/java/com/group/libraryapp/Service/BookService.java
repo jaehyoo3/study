@@ -35,14 +35,12 @@ public class BookService {
         }
         User user = userRepository.findByName(request.getUserName()).orElseThrow(IllegalAccessError::new);
 
-        userLoanHistoryRepository.save(new UserLoanHistory(user, book.getName()));
+        user.loanBook(book.getName());
     }
 
     @Transactional
     public void returnBook(LoanBookDTO request) {
         User user = userRepository.findByName(request.getUserName()).orElseThrow(IllegalAccessError::new);
-
-        UserLoanHistory history = userLoanHistoryRepository.findByUserIdAndBookName(user.getId(), request.getBookName()).orElseThrow(IllegalArgumentException::new);
-        history.setReturn(true);
+        user.returnBook(request.getBookName());
     }
 }
