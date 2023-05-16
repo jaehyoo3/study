@@ -1,7 +1,15 @@
 package com.group.libraryapp.domain;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(nullable = false, length = 20)
     private String name;
+    @Column(nullable = false)
     private Integer age;
 
     public User(String name, Integer age) {
@@ -14,6 +22,11 @@ public class User {
         this.age = age;
     }
 
+    protected User() {}
+
+    public long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -21,5 +34,17 @@ public class User {
 
     public Integer getAge() {
         return age;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
